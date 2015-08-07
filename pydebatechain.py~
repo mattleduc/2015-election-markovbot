@@ -1,0 +1,12 @@
+#!/opt/local/bin/python
+from pymarkovchain import MarkovChain
+
+mc = MarkovChain("./markov")
+
+with open("debate_transcript.txt","r") as debatefile:
+    mc.generateDatabase(debatefile.read())
+
+for i in xrange(100):
+    s = mc.generateString().decode('utf-8').replace("__",". ")
+    if (len(s) > 1):
+        print str(len(s)) + ":" + mc.generateString().replace("__",". ") + '.'
